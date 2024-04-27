@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: springboot-tdd
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot-tdd
+    username: arafin
+    password: arafinN@123
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 15
+      idle-timeout: 30000
+      pool-name: SpringBootJPAHikariCP
+      max-lifetime: 2000000
+      connection-timeout: 30000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        hbm2ddl:
+          auto: update
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        shutdown_on_session_factory_close: false
+        connection:
+          characterEncoding: utf-8
+          CharSet: utf-8
+          useUnicode: true
+        legacy_limit_handler: true
+
+server:
+  error:
+    include-stacktrace: always
+  compression:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, env, beans, httptrace
+
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
